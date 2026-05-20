@@ -1,115 +1,168 @@
-const { fork } = require('child_process')
-const path = require('path')
-const http = require('http')
+const { fork } = require('child_process');
+const path = require('path');
+const http = require('http');
+const os = require('os');
 
-let botProcess = null
-let restartCount = 0
-let lastRestartTime = 0
-const PORT = process.env.PORT || 8000
+class BotManager {
+    constructor(options = {}) {
 
-const MIN_RESTART_INTERVAL = 10000
-const RESTART_DELAY = 5000
+        this.botScript = options.script || path.join(__dirname, 'index.js');
+        this.port = process.env.PORT || 8000;
+        this.targetRam = options.targetRam || 70;
+        this.maxRamParent = options.maxRamParent || 150;
+        this.maxRamChild = options.maxRamChild || 120; 
 
-// Servidor HTTP para Koyeb (keep-alive)
-const server = http.createServer((req, res) => {
-    if (req.url === '/health' || req.url === '/') {
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify({ 
-            status: 'alive', 
-            botRunning: botProcess !== null && !botProcess.killed,
-            restarts: restartCount,
-            timestamp: Date.now()
-        }))
-    } else {
-        res.writeHead(404)
-        res.end()
-    }
-})
+        this.restartDelay = 5000;
+        this.crashCooldown = 30000;
+        this.preventiveRestartMs = (options.preventiveRestartHours || 6) * 60 * 60 * 1000;
 
-server.listen(PORT, '0.0.0.0', () => {
-    console.log(`✅ Servidor health check corriendo en puerto ${PORT}`)
-})
+        this.process = null;
+        this.isShuttingDown = false;
+        this.restartCount = 0;
+        this.lastStart = 0;
+      
+        this.gcInterval = null;
+        this.preventiveTimer = null;
+        this.monitorInterval = null;
 
-function startBot() {
-    const now = Date.now()
-
-    if (now - lastRestartTime < MIN_RESTART_INTERVAL) {
-        console.log(`⏳ Esperando ${MIN_RESTART_INTERVAL - (now - lastRestartTime)}ms para reiniciar...`)
-        setTimeout(startBot, MIN_RESTART_INTERVAL - (now - lastRestartTime))
-        return
+        this.init();
     }
 
-    if (botProcess && !botProcess.killed) {
-        console.log('⚠️ Bot ya está corriendo')
-        return
+    init() {
+        this.startHealthServer();
+        this.startGarbageCollector();
+        this.startPreventiveRestart();
+        this.spawnBot();
+        
+        process.on('SIGTERM', () => this.shutdown('SIGTERM'));
+        process.on('SIGINT', () => this.shutdown('SIGINT'));
+        process.on('uncaughtException', (err) => this.handleError('Uncaught Exception', err));
+        process.on('unhandledRejection', (reason) => this.handleError('Unhandled Rejection', reason));
     }
 
-    restartCount++
-    lastRestartTime = Date.now()
-    console.log(`🚀 Iniciando bot (intento #${restartCount})...`)
 
-    try {
-        botProcess = fork(path.join(__dirname, 'index.js'), [], {
-            stdio: 'inherit',
-            env: { ...process.env, FORKED: 'true' }
-        })
+    startHealthServer() {
+        const server = http.createServer((req, res) => {
+            const mem = process.memoryUsage();
+            const response = {
+                status: 'ok',
+                uptime: process.uptime(),
+                restarts: this.restartCount,
+                memory: {
+                    heapUsed: (mem.heapUsed / 1024 / 1024).toFixed(2) + ' MB',
+                    rss: (mem.rss / 1024 / 1024).toFixed(2) + ' MB'
+                },
+                botActive: this.process !== null && !this.process.killed
+            };
+            
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(response));
+        });
 
-        botProcess.on('exit', (code, signal) => {
-            console.log(`❌ Bot finalizado. Código: ${code}, Señal: ${signal}`)
-            botProcess = null
+        server.listen(this.port, '0.0.0.0', () => {
+            this.log(`🚀 Supervisor activo en puerto ${this.port}`);
+        });
+    }
 
-            if (Date.now() - lastRestartTime < 10000) {
-                console.log('🔄 Reinicio rápido detectado, esperando 30s...')
-                setTimeout(startBot, 30000)
-            } else {
-                console.log(`🔄 Reiniciando en ${RESTART_DELAY/1000}s...`)
-                setTimeout(startBot, RESTART_DELAY)
+    startGarbageCollector() {
+        if (global.gc) {
+            this.gcInterval = setInterval(() => {
+                global.gc();
+            }, 60000);
+        } else {
+        }
+    }
+
+    startPreventiveRestart() {
+        this.preventiveTimer = setInterval(() => {
+            if (!this.isShuttingDown && this.process) {
+                this.log(`⏰ Reinicio preventivo programado (Limpieza de RAM)`);
+                this.killProcess('PREVENTIVE_RESTART');
             }
-        })
+        }, this.preventiveRestartMs);
+    }
 
-        botProcess.on('error', (err) => {
-            console.error('💥 Error en proceso hijo:', err)
-            botProcess = null
-            setTimeout(startBot, RESTART_DELAY)
-        })
+    spawnBot() {
+        if (this.isShuttingDown) return;
+        const now = Date.now();
+        if (now - this.lastStart < this.crashCooldown) {
+            this.log(`⚠️ Crash loop detectado. Esperando ${this.crashCooldown/1000}s...`);
+            setTimeout(() => this.spawnBot(), this.crashCooldown);
+            return;
+        }
 
-        console.log('✅ Bot iniciado correctamente')
+        this.lastStart = now;
+        this.restartCount++;
+        this.log(`📦 Iniciando Bot (Intento #${this.restartCount})...`);
 
-    } catch (error) {
-        console.error('🔥 Error al iniciar bot:', error)
-        setTimeout(startBot, 10000)
+        try {
+            this.process = fork(this.botScript, [], {
+                stdio: 'inherit',
+                execArgv: ['--expose-gc'], 
+                env: { ...process.env, IS_FORKED: 'true' }
+            });
+
+            this.process.on('exit', (code, signal) => {
+                this.process = null;
+                this.log(`❌ Bot terminado. Código: ${code}, Señal: ${signal}`);
+                
+                if (!this.isShuttingDown) {
+                    const delay = (signal === 'SIGKILL' && code === null) ? this.restartDelay : this.crashCooldown;
+                    setTimeout(() => this.spawnBot(), delay);
+                }
+            });
+
+            this.process.on('error', (err) => {
+                this.log(`💥 Error al iniciar proceso hijo: ${err.message}`);
+                this.process = null;
+                setTimeout(() => this.spawnBot(), this.crashCooldown);
+            });
+
+        } catch (e) {
+            this.log(`🔥 Error crítico en spawn: ${e.message}`);
+            setTimeout(() => this.spawnBot(), this.crashCooldown);
+        }
+    }
+
+    killProcess(reason) {
+        if (this.process && !this.process.killed) {
+            this.log(`💀 Matando bot por: ${reason}`);
+            this.process.kill('SIGKILL'); 
+        }
+    }
+
+
+    monitorMemory() {
+        const mb = process.memoryUsage().heapUsed / 1024 / 1024;
+      
+        if (mb > this.maxRamParent) {
+            console.error(`🚨 CRÍTICO: Supervisor usando ${mb.toFixed(2)}MB. Reiniciando todo...`);
+            process.exit(1); 
+        }
+    }
+
+    handleError(context, error) {
+        console.error(`💣 [${context}]`, error);
+    }
+
+    shutdown(signal) {
+        this.log(`📴 Apagado ordenado (${signal})...`);
+        this.isShuttingDown = true;
+        
+        clearInterval(this.gcInterval);
+        clearInterval(this.preventiveTimer);
+        
+        if (this.process) this.process.kill('SIGTERM');
+        
+        setTimeout(() => process.exit(0), 5000);
+    }
+
+    log(msg) {
+        console.log(`[${new Date().toLocaleTimeString()}] ${msg}`);
     }
 }
 
-setInterval(() => {
-    if (!botProcess || botProcess.killed) {
-        console.log('🔍 Proceso hijo no detectado, iniciando...')
-        startBot()
-    } else {
-        console.log('💚 Bot funcionando correctamente')
-    }
-}, 30000)
-
-// Manejadores de señal limpios
-process.on('SIGTERM', () => {
-    console.log('📴 Recibido SIGTERM, cerrando...')
-    if (botProcess && !botProcess.killed) {
-        botProcess.kill('SIGTERM')
-    }
-    server.close(() => process.exit(0))
-})
-
-process.on('SIGINT', () => {
-    console.log('📴 Recibido SIGINT, cerrando...')
-    if (botProcess && !botProcess.killed) {
-        botProcess.kill('SIGINT')
-    }
-    server.close(() => process.exit(0))
-})
-
-process.on('uncaughtException', (err) => {
-    console.error('💣 Excepción no capturada:', err)
-})
-
-console.log(`🎯 Main process iniciado en puerto ${PORT}`)
-startBot()
+new BotManager({
+    targetRam: 70,
+    preventiveRestartHours: 6 
+});
