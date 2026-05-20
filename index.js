@@ -24,13 +24,15 @@ const os = require('os')
 const http = require('http')
 const url = require('url')
 
-const { logger } = require('./lib/logger.js')
-const KeepAlive = require('./lib/keep-alive.js')
-const { bailMessage } = require('./lib/Message')
-const handler = require('./starlight.js')
-const { runOnce } = require('./lib/jadibot')
-
-const config = JSON.parse(fs.readFileSync('./config.json'))
+// ============ CARGA DE CONFIGURACIÓN ============
+let config = {}
+try {
+    config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+    console.log('✅ Configuración cargada correctamente')
+} catch (err) {
+    console.error('❌ Error cargando config.json:', err.message)
+    process.exit(1)
+}
 
 // ============ SERVIDOR HTTP ============
 const server = http.createServer(async (req, res) => {
@@ -45,8 +47,8 @@ const server = http.createServer(async (req, res) => {
         return
     }
     
-    const parsedUrl = url.parse(req.url, true)
-    const pathname = parsedUrl.pathname
+    const parsedUrl = url.parse(req.url || '', true)
+    const pathname = parsedUrl.pathname || '/'
     
     // Endpoint GET /status
     if (pathname === '/status' && req.method === 'GET') {
@@ -57,104 +59,10 @@ const server = http.createServer(async (req, res) => {
             connected: sock?.user ? true : false,
             jid: sock?.user?.jid || null,
             uptime: process.uptime(),
-            memory: process.memoryUsage().rss / 1024 / 1024,
-            node: process.version
+            memory: Math.round(process.memoryUsage().rss / 1024 / 1024),
+            node: process.version,
+            timestamp: new Date().toISOString()
         }))
-        return
-    }
-    
-    // Endpoint POST /pair
-    if (pathname === '/pair' && req.method === 'POST') {
-        let body = ''
-        req.on('data', chunk => { body += chunk })
-        req.on('end', async () => {
-            try {
-                const data = JSON.parse(body)
-                const { number } = data
-                
-                if (!number) {
-                    res.writeHead(400, { 'Content-Type': 'application/json' })
-                    res.end(JSON.stringify({
-                        success: false,
-                        error: 'Número requerido. Ejemplo: {"number": "51920700424"}'
-                    }))
-                    return
-                }
-                
-                const cleanNumber = number.toString().replace(/[^0-9]/g, '')
-                
-                if (!sock || typeof sock.requestPairingCode !== 'function') {
-                    res.writeHead(503, { 'Content-Type': 'application/json' })
-                    res.end(JSON.stringify({
-                        success: false,
-                        error: 'Bot no inicializado o método no disponible'
-                    }))
-                    return
-                }
-                
-                console.log(`🔐 API: Generando código para: ${cleanNumber}`)
-                
-                const raw_code = await sock.requestPairingCode(cleanNumber, 'STARTEAM')
-                const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
-                
-                logger.info('🔑 Código generado vía API', {
-                    numero: cleanNumber.replace(/(\d{3})(\d{4})(\d+)/, '$1****$3')
-                })
-                
-                res.writeHead(200, { 'Content-Type': 'application/json' })
-                res.end(JSON.stringify({
-                    success: true,
-                    number: cleanNumber,
-                    code: code,
-                    message: 'Usa este código en WhatsApp > Dispositivos vinculados > Vincular dispositivo'
-                }))
-                
-            } catch (error) {
-                console.error('Error en API /pair:', error)
-                res.writeHead(500, { 'Content-Type': 'application/json' })
-                res.end(JSON.stringify({
-                    success: false,
-                    error: error.message
-                }))
-            }
-        })
-        return
-    }
-    
-    // Endpoint GET / (root)
-    if (pathname === '/' && req.method === 'GET') {
-        res.writeHead(200, { 'Content-Type': 'text/html' })
-        res.end(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Starlight Bot API</title>
-                <style>
-                    body { font-family: monospace; max-width: 800px; margin: 50px auto; padding: 20px; }
-                    h1 { color: #25D366; }
-                    code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; }
-                    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto; }
-                </style>
-            </head>
-            <body>
-                <h1>🤖 Starlight Bot API</h1>
-                <p>Bot funcionando correctamente</p>
-                
-                <h2>Endpoints:</h2>
-                
-                <h3>GET /status</h3>
-                <pre>curl http://localhost:${PORT}/status</pre>
-                
-                <h3>POST /pair</h3>
-                <pre>curl -X POST http://localhost:${PORT}/pair \\
-  -H "Content-Type: application/json" \\
-  -d '{"number":"51920700424"}'</pre>
-                
-                <h3>GET /health</h3>
-                <pre>curl http://localhost:${PORT}/health</pre>
-            </body>
-            </html>
-        `)
         return
     }
     
@@ -169,33 +77,140 @@ const server = http.createServer(async (req, res) => {
         return
     }
     
-    // 404
+    // Endpoint POST /pair (API principal)
+    if (pathname === '/pair' && req.method === 'POST') {
+        let body = ''
+        req.on('data', chunk => { body += chunk })
+        req.on('end', async () => {
+            try {
+                const data = JSON.parse(body)
+                const { number } = data
+                
+                if (!number) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' })
+                    res.end(JSON.stringify({
+                        success: false,
+                        error: '❌ Número requerido. Ejemplo: {"number": "51920700424"}'
+                    }))
+                    return
+                }
+                
+                const cleanNumber = number.toString().replace(/[^0-9]/g, '')
+                
+                if (!sock || typeof sock.requestPairingCode !== 'function') {
+                    res.writeHead(503, { 'Content-Type': 'application/json' })
+                    res.end(JSON.stringify({
+                        success: false,
+                        error: '❌ Bot no inicializado o método no disponible'
+                    }))
+                    return
+                }
+                
+                console.log(`🔐 API: Generando código para: ${cleanNumber}`)
+                
+                const raw_code = await sock.requestPairingCode(cleanNumber, 'STARTEAM')
+                const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
+                
+                console.log(`✅ API: Código generado para ${cleanNumber}: ${code}`)
+                
+                res.writeHead(200, { 'Content-Type': 'application/json' })
+                res.end(JSON.stringify({
+                    success: true,
+                    number: cleanNumber,
+                    code: code,
+                    message: '✅ Usa este código en WhatsApp > Dispositivos vinculados > Vincular dispositivo'
+                }))
+                
+            } catch (error) {
+                console.error('❌ Error en API /pair:', error)
+                res.writeHead(500, { 'Content-Type': 'application/json' })
+                res.end(JSON.stringify({
+                    success: false,
+                    error: error.message
+                }))
+            }
+        })
+        return
+    }
+    
+    // Endpoint GET / (información)
+    if (pathname === '/' && req.method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+        res.end(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Starlight Bot API</title>
+                <style>
+                    body { font-family: monospace; max-width: 800px; margin: 50px auto; padding: 20px; }
+                    h1 { color: #25D366; }
+                    code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; }
+                    pre { background: #f4f4f4; padding: 15px; border-radius: 4px; overflow-x: auto; }
+                    .endpoint { margin: 20px 0; border-left: 3px solid #25D366; padding-left: 15px; }
+                </style>
+            </head>
+            <body>
+                <h1>🤖 Starlight Bot API</h1>
+                <p>✅ Bot funcionando correctamente</p>
+                
+                <h2>📡 Endpoints disponibles:</h2>
+                
+                <div class="endpoint">
+                    <h3>GET /status</h3>
+                    <pre>curl https://${req.headers.host}/status</pre>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>GET /health</h3>
+                    <pre>curl https://${req.headers.host}/health</pre>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>POST /pair</h3>
+                    <pre>curl -X POST https://${req.headers.host}/pair \\
+  -H "Content-Type: application/json" \\
+  -d '{"number":"51920700424"}'</pre>
+                </div>
+                
+                <hr>
+                <p><small>Starlight Bot - ${new Date().toLocaleString()}</small></p>
+            </body>
+            </html>
+        `)
+        return
+    }
+    
+    // 404 para rutas no encontradas
     res.writeHead(404, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify({ error: 'Endpoint no encontrado' }))
+    res.end(JSON.stringify({ 
+        error: '❌ Endpoint no encontrado',
+        available: ['GET /', 'GET /status', 'GET /health', 'POST /pair']
+    }))
 })
 
 const PORT = process.env.PORT || 8000
-server.listen(PORT, () => {
-    console.log(`✅ Servidor HTTP corriendo en puerto ${PORT}`)
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n✅ Servidor HTTP corriendo en puerto ${PORT}`)
     console.log(`📍 Endpoints disponibles:`)
+    console.log(`   GET  /        - Información de la API`)
     console.log(`   GET  /status  - Estado del bot`)
-    console.log(`   POST /pair    - Generar código de emparejamiento`)
-    console.log(`   GET  /health  - Health check`)
-    console.log(`   GET  /        - Información de la API\n`)
+    console.log(`   GET  /health  - Health check para Koyeb`)
+    console.log(`   POST /pair    - Generar código de emparejamiento\n`)
 })
 
 // ============ FIN SERVIDOR HTTP ============
 
-const RECONNECT_BASE_DELAY = config.connection?.reconnectBaseDelay || 3_000
-const RECONNECT_MAX_DELAY = config.connection?.reconnectMaxDelay || 120_000
+// ============ CONFIGURACIÓN DEL BOT ============
+const RECONNECT_BASE_DELAY = config.connection?.reconnectBaseDelay || 3000
+const RECONNECT_MAX_DELAY = config.connection?.reconnectMaxDelay || 120000
 const RECONNECT_MULTIPLIER = 1.8
 const MAX_RECONNECT_ATTEMPTS = config.connection?.maxReconnectAttempts || 50
 
-const MEMORY_CHECK_INTERVAL = 15_000
-const PROCESSED_MSG_TTL = 5 * 60_000
-const DELETED_MSG_TTL = 24 * 60 * 60_000
-const GROUP_CACHE_TTL = 10 * 60_000
-const GROUP_CACHE_CHECK = 2 * 60_000
+const MEMORY_CHECK_INTERVAL = 15000
+const PROCESSED_MSG_TTL = 5 * 60 * 1000
+const DELETED_MSG_TTL = 24 * 60 * 60 * 1000
+const GROUP_CACHE_TTL = 10 * 60 * 1000
+const GROUP_CACHE_CHECK = 2 * 60 * 1000
 
 const processedMessages = new Set()
 const deletedMessages = new Map()
@@ -221,44 +236,29 @@ const groupCache = new NodeCache({
     deleteOnExpire: true
 })
 
-if (config.debug) {
-    groupCache.on('expired', (key, value) => {
-        logger.debug('Cache de grupo expirado', { jid: key })
-    })
-    groupCache.on('flush', () => {
-        logger.debug('Cache de grupos limpiada')
-    })
-}
-
+// ============ FUNCIONES AUXILIARES ============
 async function gracefulShutdown(signal) {
     if (isShuttingDown) return
     isShuttingDown = true
     
-    logger.info('🛑 Iniciando apagado graceful', { signal })
     console.log(`\n🛑 Señal ${signal} recibida. Cerrando bot...`)
     
     clearTimeout(reconnectTimer)
     
     if (keepAlive) {
-        keepAlive.stop()
+        try { keepAlive.stop() } catch {}
     }
     
     if (sock) {
-        try {
-            await sock.logout()
-            logger.info('✅ Socket cerrado correctamente')
-        } catch {
-            try { sock.end() } catch {}
-        }
+        try { await sock.logout() } catch {}
+        try { sock.end() } catch {}
     }
     
     groupCache.close()
     server.close(() => {
-        console.log('✅ Servidor HTTP cerrado')
+        console.log('👋 Bot cerrado correctamente')
+        setTimeout(() => process.exit(0), 1000)
     })
-    
-    console.log('👋 Bot cerrado correctamente')
-    setTimeout(() => process.exit(0), 1000)
 }
 
 process.on('SIGINT', () => gracefulShutdown('SIGINT'))
@@ -270,31 +270,14 @@ function getReconnectDelay(attempt) {
         RECONNECT_MAX_DELAY
     )
     const jitter = base * 0.2 * Math.random()
-    const delay = Math.floor(base + jitter)
-    
-    logger.info('📊 Delay de reconexión calculado', {
-        intento: attempt,
-        delay: `${(delay / 1000).toFixed(1)}s`
-    })
-    
-    return delay
+    return Math.floor(base + jitter)
 }
 
 function flushMemory(force = false) {
     try {
-        const before = (process.memoryUsage().rss / 1048576).toFixed(1)
-        
         if (global.gc && (force || process.memoryUsage().rss > 512 * 1024 * 1024)) {
             global.gc()
-            logger.info('🗑️ Garbage collection ejecutada', {
-                forzada: force,
-                memoriaAntes: `${before}MB`
-            })
         }
-        
-        if (sock?.chats?.clear) sock.chats.clear()
-        if (sock?.groups?.clear) sock.groups.clear()
-        if (sock?.messages?.clear) sock.messages.clear()
         
         const now = Date.now()
         for (const [id, data] of deletedMessages.entries()) {
@@ -302,28 +285,9 @@ function flushMemory(force = false) {
                 deletedMessages.delete(id)
             }
         }
-        
-        sock?.ev?.emit('cleanup')
-        
-        if (config.debug) {
-            const memAfter = (process.memoryUsage().rss / 1048576).toFixed(1)
-            logger.debug('🧹 Limpieza de memoria', {
-                antes: `${before}MB`,
-                despues: `${memAfter}MB`
-            })
-        }
     } catch (e) {
-        logger.error('Error en flushMemory', e)
+        console.error('Error en flushMemory:', e)
     }
-}
-
-function formatUptime() {
-    const seconds = Math.floor(process.uptime())
-    const days = Math.floor(seconds / 86400)
-    const hours = Math.floor((seconds % 86400) / 3600)
-    const minutes = Math.floor((seconds % 3600) / 60)
-    const secs = seconds % 60
-    return `${days}d ${hours}h ${minutes}m ${secs}s`
 }
 
 async function getGroupMetadata(jid) {
@@ -332,39 +296,19 @@ async function getGroupMetadata(jid) {
         if (!normalizedJid || !normalizedJid.endsWith('@g.us')) return null
         
         let metadata = groupCache.get(normalizedJid)
-        if (metadata) {
-            if (config.debug) logger.debug('✅ Cache hit de grupo', { jid: normalizedJid })
-            return metadata
-        }
+        if (metadata) return metadata
         
-        if (config.debug) logger.debug('❌ Cache miss de grupo', { jid: normalizedJid })
-        
-        metadata = await sock.groupMetadata(normalizedJid).catch((err) => {
-            logger.error('Error obteniendo metadata de grupo', err, { jid: normalizedJid })
-            return null
-        })
-        
-        if (metadata) {
-            groupCache.set(normalizedJid, metadata)
-            logger.info('💾 Metadata de grupo cacheada', {
-                jid: normalizedJid,
-                subject: metadata.subject,
-                participantes: metadata.participants?.length || 0
-            })
-        }
-        
+        metadata = await sock.groupMetadata(normalizedJid).catch(() => null)
+        if (metadata) groupCache.set(normalizedJid, metadata)
         return metadata
     } catch (e) {
-        logger.error('Error en getGroupMetadata', e, { jid })
         return null
     }
 }
 
+// ============ CONEXIÓN PRINCIPAL ============
 async function connectSock() {
-    if (isShuttingDown) {
-        logger.warn('⚠️ Conexión abortada - bot cerrándose')
-        return
-    }
+    if (isShuttingDown) return
     
     connectionStartTime = Date.now()
     
@@ -379,14 +323,12 @@ async function connectSock() {
         state = auth.state
         saveCreds = auth.saveCreds
         
-        logger.info('📂 Estado de autenticación cargado', {
-            registrado: state.creds?.registered
-        })
+        console.log(`📂 Estado de autenticación: ${state.creds?.registered ? '✅ Registrado' : '❌ No registrado'}`)
         
         const msgRetryCounterCache = new NodeCache({ stdTTL: 60 })
         const { version, isLatest } = await fetchLatestBaileysVersion()
         
-        logger.info('📦 Versión de Baileys', { version, esUltima: isLatest })
+        console.log(`📦 Versión de Baileys: ${version.join('.')}`)
         
         sock = makeWASocket({
             version,
@@ -397,9 +339,7 @@ async function connectSock() {
                 creds: state.creds,
                 keys: makeCacheableSignalKeyStore(state.keys, silentLogger)
             },
-            cachedGroupMetadata: async (jid) => {
-                return getGroupMetadata(jid)
-            },
+            cachedGroupMetadata: getGroupMetadata,
             msgRetryCounterCache,
             generateHighQualityLinkPreview: true,
             getMessage: async () => null,
@@ -414,9 +354,10 @@ async function connectSock() {
             shouldSyncHistoryMessage: () => false,
             shouldIgnoreJid: (jid) => isJidBroadcast(jid),
             maxRetries: 5,
-            patchMessageBeforeSending: (msg) => msg
         })
         
+        // Importar KeepAlive después de crear sock
+        const KeepAlive = require('./lib/keep-alive.js')
         keepAlive = new KeepAlive(sock, {
             pingInterval: config.connection?.pingInterval || 15000,
             presenceInterval: config.connection?.presenceInterval || 45000,
@@ -427,236 +368,112 @@ async function connectSock() {
             maxReconnectAttempts: MAX_RECONNECT_ATTEMPTS
         })
         
+        const { bailMessage } = require('./lib/Message')
         const light = bailMessage(sock)
         
-        sock.ev.on('groups.update', (updates) => {
-            try {
-                for (const update of updates) {
-                    const id = update.id?.replace(/:\d+@/g, '@')
-                    if (!id) continue
-                    
-                    const prev = groupCache.get(id) || {}
-                    const merged = { ...prev, ...update }
-                    groupCache.set(id, merged)
-                    
-                    logger.info('🔄 Grupo actualizado', {
-                        jid: id,
-                        cambios: Object.keys(update).join(', ')
-                    })
-                }
-            } catch (e) {
-                logger.error('Error en groups.update', e)
-            }
-        })
-        
-        sock.ev.on('group-participants.update', async ({ id, participants, action }) => {
-            try {
-                const normalizedId = id?.replace(/:\\d+@/g, '@')
-                if (!normalizedId) return
-                
-                groupCache.del(normalizedId)
-                logger.info('👥 Participantes de grupo actualizados', {
-                    jid: normalizedId,
-                    accion: action,
-                    cantidad: participants.length
-                })
-                
-                const metadata = await sock.groupMetadata(normalizedId).catch((err) => {
-                    logger.error('Error actualizando metadata de grupo', err, { jid: normalizedId })
-                    return null
-                })
-                
-                if (metadata) {
-                    groupCache.set(normalizedId, metadata)
-                }
-            } catch (e) {
-                logger.error('Error en group-participants.update', e)
-            }
-        })
-        
+        // ============ EVENTOS ============
         sock.ev.on('creds.update', async (creds) => {
-            try {
-                await saveCreds(creds)
-                lastActivity = Date.now()
-                if (keepAlive) keepAlive.updateActivity(lastActivity)
-                logger.debug('🔐 Credenciales actualizadas')
-            } catch (e) {
-                logger.error('Error guardando credenciales', e)
-            }
+            await saveCreds(creds)
+            lastActivity = Date.now()
+            if (keepAlive) keepAlive.updateActivity(lastActivity)
         })
         
         // ============ GENERAR CÓDIGO DE PAREAMIENTO ============
         if (!sock.authState.creds.registered && !codeGenerated) {
             codeGenerated = true
             
-            console.log('\n' + '='.repeat(50))
-            console.log('🔐 BOT NO REGISTRADO - MODO PAREAMIENTO')
-            console.log('='.repeat(50))
+            console.log('\n' + '='.repeat(60))
+            console.log('🔐 BOT NO REGISTRADO - GENERANDO CÓDIGO DE PAREAMIENTO')
+            console.log('='.repeat(60))
             
-            // Usar número de config o el que viene por defecto
             const defaultNumber = config.numbot || "51920700424"
             const cleanNumber = defaultNumber.toString().replace(/[^0-9]/g, '')
             
             console.log(`📱 Número configurado: ${cleanNumber}`)
-            console.log(`🌐 También puedes usar POST /pair con {"number":"tu_numero"}\n`)
+            console.log(`💡 También puedes usar: POST /pair con {"number":"tu_numero"}\n`)
             
             if (typeof sock.requestPairingCode === 'function') {
                 try {
-                    // Esperar un poco para que la conexión se estabilice
-                    await new Promise(resolve => setTimeout(resolve, 2000))
+                    // Esperar a que la conexión se estabilice
+                    await new Promise(resolve => setTimeout(resolve, 3000))
                     
                     const raw_code = await sock.requestPairingCode(cleanNumber, 'STARTEAM')
                     const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
                     
-                    logger.info('🔑 Código de emparejamiento generado', {
-                        numero: cleanNumber.replace(/(\d{3})(\d{4})(\d+)/, '$1****$3')
-                    })
-                    
-                    console.log('\n' + '🚨'.repeat(15))
-                    console.log(`🚩 CÓDIGO DE PAREAMIENTO: ${code}`)
-                    console.log('🚨'.repeat(15))
+                    console.log('\n' + '🚨'.repeat(20))
+                    console.log(`🎯 CÓDIGO DE PAREAMIENTO: ${code}`)
+                    console.log('🚨'.repeat(20))
                     console.log('\n📱 INSTRUCCIONES:')
-                    console.log('1. Abre WhatsApp en tu teléfono')
-                    console.log('2. Ve a Ajustes/Configuración')
-                    console.log('3. Dispositivos vinculados')
-                    console.log('4. Toca "Vincular dispositivo"')
-                    console.log(`5. Ingresa el código: ${code}`)
+                    console.log('   1. Abre WhatsApp en tu teléfono')
+                    console.log('   2. Ve a Ajustes/Configuración')
+                    console.log('   3. Dispositivos vinculados')
+                    console.log('   4. Toca "Vincular dispositivo"')
+                    console.log(`   5. Ingresa el código: ${code}`)
                     console.log('\n⏰ El código expira en 2 minutos\n')
                     
                 } catch (error) {
                     console.error('❌ Error generando código:', error.message)
-                    logger.error('Error generando código de pareamiento', error)
                 }
-            } else {
-                console.error('❌ requestPairingCode no está disponible en esta versión de Baileys')
             }
         } else if (sock.authState.creds.registered) {
-            console.log('\n✅ BOT YA ESTÁ REGISTRADO')
-            console.log(`📱 Conectado como: ${sock.user?.jid?.split('@')[0] || 'Desconocido'}\n`)
+            console.log('\n✅ BOT YA ESTÁ REGISTRADO Y FUNCIONANDO\n')
         }
-        // ============ FIN GENERACIÓN ============
         
+        // ============ MANEJO DE MENSAJES ============
         sock.ev.on('messages.upsert', async ({ messages, type }) => {
             if (type !== 'notify') return
             
-            const processStart = Date.now()
             lastActivity = Date.now()
             if (keepAlive) keepAlive.updateActivity(lastActivity)
             
             for (const msg of messages) {
-                if (msg.key.remoteJid?.endsWith('@g.us')) {
-                    const jid = msg.key.remoteJid.replace(/:\\d+@/g, '@')
-                    if (!groupCache.has(jid)) {
-                        getGroupMetadata(jid).catch(() => {})
-                    }
-                }
-                
                 if (!msg.message) continue
                 if (isJidBroadcast(msg.key.remoteJid ?? '')) continue
-                
-                if (msg.key.remoteJid?.endsWith('@g.us')) {
-                    deletedMessages.set(msg.key.id, { message: msg, timestamp: Date.now() })
-                    if (deletedMessages.size > 1000) {
-                        const firstKey = deletedMessages.keys().next().value
-                        deletedMessages.delete(firstKey)
-                    }
-                }
                 
                 if (processedMessages.has(msg.key.id)) continue
                 processedMessages.add(msg.key.id)
                 setTimeout(() => processedMessages.delete(msg.key.id), PROCESSED_MSG_TTL)
                 
                 try {
+                    const handler = require('./starlight.js')
                     await handler(msg, sock, light, caches, config, path.join(__dirname, 'plugins'))
-                    
-                    const processTime = Date.now() - processStart
-                    if (processTime > 1000) {
-                        logger.warn('⚠️ Procesamiento lento de mensaje', {
-                            id: msg.key.id,
-                            tiempo: `${processTime}ms`
-                        })
-                    }
                 } catch (e) {
-                    logger.error('Error procesando mensaje', e, {
-                        id: msg.key.id,
-                        jid: msg.key.remoteJid
-                    })
+                    console.error('Error procesando mensaje:', e)
                 }
             }
         })
         
+        // ============ MANEJO DE CONEXIÓN ============
         sock.ev.on('connection.update', async ({ connection, lastDisconnect }) => {
-            if (keepAlive) {
-                keepAlive.state.isConnected = connection === 'open'
-            }
-            
-            if (connection === 'connecting') {
-                console.log('🔄 Conectando con WhatsApp...')
-                return
-            }
-            
             if (connection === 'open') {
                 reconnecting = false
                 reconnectAttempts = 0
                 clearTimeout(reconnectTimer)
-                lastActivity = Date.now()
-                
-                logger.info('✅ Conexión establecida', {
-                    jid: sock.user?.jid,
-                    tiempoConexion: `${Date.now() - connectionStartTime}ms`
-                })
                 
                 console.log(`\n✅ ${config.name_bot || 'Starlight'} conectado correctamente`)
                 console.log(`📱 Número: ${sock.user?.jid?.split('@')[0]}`)
-                console.log(`⏰ Tiempo: ${Date.now() - connectionStartTime}ms\n`)
+                console.log(`⏰ Tiempo de conexión: ${Date.now() - connectionStartTime}ms\n`)
                 
                 await keepAlive.start()
                 
                 try {
-                    const chats = await sock.groupFetchAllParticipating?.().catch(() => ({}))
-                    if (chats) {
-                        for (const [jid, metadata] of Object.entries(chats)) {
-                            groupCache.set(jid, metadata)
-                        }
-                        logger.info('👥 Grupos precargados', {
-                            cantidad: Object.keys(chats).length
-                        })
-                        console.log(`👥 ${Object.keys(chats).length} grupos precargados\n`)
-                    }
-                } catch (err) {
-                    logger.error('Error precargando grupos', err)
-                }
-                
-                await runOnce().catch(e => logger.error('Error en runOnce', e))
+                    const { runOnce } = require('./lib/jadibot')
+                    await runOnce().catch(e => console.error('Error en runOnce:', e))
+                } catch {}
                 return
             }
             
             if (connection === 'close') {
                 const statusCode = lastDisconnect?.error?.output?.statusCode
-                const reason = DisconnectReason
                 const errorMsg = lastDisconnect?.error?.message || 'Desconocido'
-                
-                logger.info('🔌 Conexión cerrada', {
-                    statusCode,
-                    error: errorMsg
-                })
                 
                 console.log(`\n🔌 Conexión cerrada [${statusCode}]: ${errorMsg}`)
                 
-                if (keepAlive) {
-                    keepAlive.state.isConnected = false
-                    if (keepAlive.monitor) keepAlive.monitor.incrementReconnects()
-                }
+                if (keepAlive) keepAlive.state.isConnected = false
                 
-                const permanentCodes = new Set([
-                    reason.loggedOut,
-                    reason.forbidden,
-                    reason.badSession,
-                ])
-                
-                if (permanentCodes.has(statusCode)) {
-                    logger.error('⛔ Desconexión permanente', { statusCode })
-                    console.log(`\n⛔ Desconexión permanente (código ${statusCode})`)
+                const permanentCodes = [DisconnectReason.loggedOut, DisconnectReason.forbidden, DisconnectReason.badSession]
+                if (permanentCodes.includes(statusCode)) {
+                    console.log('\n⛔ Desconexión permanente')
                     console.log('💡 Solución: Borra la carpeta "./session" y reinicia el bot\n')
                     isShuttingDown = true
                     return
@@ -665,89 +482,46 @@ async function connectSock() {
                 if (!reconnecting && !isShuttingDown) {
                     reconnecting = true
                     const delay = getReconnectDelay(reconnectAttempts)
+                    reconnectAttempts = Math.min(reconnectAttempts + 1, MAX_RECONNECT_ATTEMPTS)
                     
-                    if (reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
-                        reconnectAttempts++
-                    }
+                    console.log(`🔄 Reconectando en ${(delay / 1000).toFixed(1)}s (intento ${reconnectAttempts})\n`)
                     
-                    console.log(`🔄 Reconectando en ${(delay / 1000).toFixed(1)}s (intento ${reconnectAttempts})…\n`)
-                    
-                    reconnectTimer = setTimeout(async () => {
+                    reconnectTimer = setTimeout(() => {
                         reconnecting = false
-                        await connectSock()
+                        connectSock()
                     }, delay)
                 }
             }
         })
         
-        sock.ev.on('CB:stream:error', (node) => {
-            lastActivity = Date.now()
-            if (keepAlive) keepAlive.updateActivity(lastActivity)
-            logger.warn('⚠️ Error de stream', { node })
-        })
-        
-        cron.schedule(`*/${config.intervalo || 30} * * * * *`, () => {
-            try {
-                const totalMB = os.totalmem() / 1_048_576
-                const freeMB = os.freemem() / 1_048_576
-                const usedMB = totalMB - freeMB
-                
-                if (usedMB > (config.ram_limit || 1024)) {
-                    logger.warn('⚠️ Memoria del sistema alta', {
-                        usado: `${usedMB.toFixed(0)}MB`,
-                        total: `${totalMB.toFixed(0)}MB`
-                    })
-                    flushMemory(true)
-                }
-            } catch (err) {
-                logger.error('Error en CRON de monitoreo', err)
-            }
-        })
-        
-        return sock
+        // Monitoreo de memoria
+        setInterval(() => {
+            const rssMB = process.memoryUsage().rss / 1048576
+            if (rssMB > (config.ram_limit || 512)) flushMemory(true)
+        }, MEMORY_CHECK_INTERVAL)
         
     } catch (err) {
-        logger.error('Error fatal en conexión', err, {
-            intento: reconnectAttempts
-        })
+        console.error('❌ Error fatal en conexión:', err.message)
         
         if (!isShuttingDown) {
             const delay = getReconnectDelay(reconnectAttempts)
             reconnectAttempts = Math.min(reconnectAttempts + 1, MAX_RECONNECT_ATTEMPTS)
             
             console.log(`❌ Error de conexión. Reintentando en ${(delay / 1000).toFixed(1)}s...`)
-            
             reconnectTimer = setTimeout(connectSock, delay)
         }
     }
 }
 
-setInterval(() => {
-    try {
-        const rssMB = process.memoryUsage().rss / 1_048_576
-        if (rssMB > (config.ram_limit || 512)) {
-            flushMemory(true)
-        }
-    } catch (err) {
-        logger.error('Error en monitoreo de memoria', err)
-    }
-}, MEMORY_CHECK_INTERVAL)
-
+// ============ INICIO ============
 async function start() {
-    console.log('\n' + '='.repeat(50))
+    console.log('\n' + '='.repeat(60))
     console.log('🤖 Iniciando Starlight Bot...')
-    console.log('='.repeat(50))
+    console.log('='.repeat(60))
     console.log(`💻 Sistema: ${os.type()} ${os.release()}`)
     console.log(`🧠 Memoria: ${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)}GB`)
     console.log(`🔧 Node.js: ${process.version}`)
     console.log(`🌐 Puerto API: ${PORT}\n`)
-    
-    logger.info('🚀 Bot iniciado', {
-        sistema: os.type(),
-        memoria: `${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)}GB`,
-        node: process.version,
-        timestamp: new Date().toISOString()
-    })
     
     await connectSock()
 }
