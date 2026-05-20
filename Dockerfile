@@ -1,16 +1,18 @@
-FROM node:20-bullseye-slim
+FROM node:18-slim
 
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Instalar ffmpeg y dependencias
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --omit=dev
+RUN npm install --production
 
 COPY . .
 
-RUN mkdir -p session tmp
+EXPOSE 8000
 
-CMD ["node", "index.js"]
+CMD ["node", "main.js"]
