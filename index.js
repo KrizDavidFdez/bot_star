@@ -12,26 +12,179 @@ const {
     makeCacheableSignalKeyStore,
     fetchLatestBaileysVersion,
     isJidBroadcast,
-    PHONENUMBER_MCC,
     jidNormalizedUser
 } = require('@whiskeysockets/baileys')
 
 const pino = require('pino')
 const fs = require('fs')
 const path = require('path')
-const readline = require('readline')
 const NodeCache = require('node-cache')
 const cron = require('node-cron')
 const os = require('os')
+const http = require('http')
+const url = require('url')
 
 const { logger } = require('./lib/logger.js')
 const KeepAlive = require('./lib/keep-alive.js')
-
 const { bailMessage } = require('./lib/Message')
 const handler = require('./starlight.js')
 const { runOnce } = require('./lib/jadibot')
 
 const config = JSON.parse(fs.readFileSync('./config.json'))
+
+// ============ SERVIDOR HTTP ============
+const server = http.createServer(async (req, res) => {
+    // CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    
+    if (req.method === 'OPTIONS') {
+        res.writeHead(200)
+        res.end()
+        return
+    }
+    
+    const parsedUrl = url.parse(req.url, true)
+    const pathname = parsedUrl.pathname
+    
+    // Endpoint GET /status
+    if (pathname === '/status' && req.method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({
+            success: true,
+            registered: sock?.authState?.creds?.registered || false,
+            connected: sock?.user ? true : false,
+            jid: sock?.user?.jid || null,
+            uptime: process.uptime(),
+            memory: process.memoryUsage().rss / 1024 / 1024,
+            node: process.version
+        }))
+        return
+    }
+    
+    // Endpoint POST /pair
+    if (pathname === '/pair' && req.method === 'POST') {
+        let body = ''
+        req.on('data', chunk => { body += chunk })
+        req.on('end', async () => {
+            try {
+                const data = JSON.parse(body)
+                const { number } = data
+                
+                if (!number) {
+                    res.writeHead(400, { 'Content-Type': 'application/json' })
+                    res.end(JSON.stringify({
+                        success: false,
+                        error: 'Número requerido. Ejemplo: {"number": "51920700424"}'
+                    }))
+                    return
+                }
+                
+                const cleanNumber = number.toString().replace(/[^0-9]/g, '')
+                
+                if (!sock || typeof sock.requestPairingCode !== 'function') {
+                    res.writeHead(503, { 'Content-Type': 'application/json' })
+                    res.end(JSON.stringify({
+                        success: false,
+                        error: 'Bot no inicializado o método no disponible'
+                    }))
+                    return
+                }
+                
+                console.log(`🔐 API: Generando código para: ${cleanNumber}`)
+                
+                const raw_code = await sock.requestPairingCode(cleanNumber, 'STARTEAM')
+                const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
+                
+                logger.info('🔑 Código generado vía API', {
+                    numero: cleanNumber.replace(/(\d{3})(\d{4})(\d+)/, '$1****$3')
+                })
+                
+                res.writeHead(200, { 'Content-Type': 'application/json' })
+                res.end(JSON.stringify({
+                    success: true,
+                    number: cleanNumber,
+                    code: code,
+                    message: 'Usa este código en WhatsApp > Dispositivos vinculados > Vincular dispositivo'
+                }))
+                
+            } catch (error) {
+                console.error('Error en API /pair:', error)
+                res.writeHead(500, { 'Content-Type': 'application/json' })
+                res.end(JSON.stringify({
+                    success: false,
+                    error: error.message
+                }))
+            }
+        })
+        return
+    }
+    
+    // Endpoint GET / (root)
+    if (pathname === '/' && req.method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'text/html' })
+        res.end(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Starlight Bot API</title>
+                <style>
+                    body { font-family: monospace; max-width: 800px; margin: 50px auto; padding: 20px; }
+                    h1 { color: #25D366; }
+                    code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; }
+                    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto; }
+                </style>
+            </head>
+            <body>
+                <h1>🤖 Starlight Bot API</h1>
+                <p>Bot funcionando correctamente</p>
+                
+                <h2>Endpoints:</h2>
+                
+                <h3>GET /status</h3>
+                <pre>curl http://localhost:${PORT}/status</pre>
+                
+                <h3>POST /pair</h3>
+                <pre>curl -X POST http://localhost:${PORT}/pair \\
+  -H "Content-Type: application/json" \\
+  -d '{"number":"51920700424"}'</pre>
+                
+                <h3>GET /health</h3>
+                <pre>curl http://localhost:${PORT}/health</pre>
+            </body>
+            </html>
+        `)
+        return
+    }
+    
+    // Endpoint GET /health
+    if (pathname === '/health' && req.method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({
+            status: 'ok',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime()
+        }))
+        return
+    }
+    
+    // 404
+    res.writeHead(404, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify({ error: 'Endpoint no encontrado' }))
+})
+
+const PORT = process.env.PORT || 8000
+server.listen(PORT, () => {
+    console.log(`✅ Servidor HTTP corriendo en puerto ${PORT}`)
+    console.log(`📍 Endpoints disponibles:`)
+    console.log(`   GET  /status  - Estado del bot`)
+    console.log(`   POST /pair    - Generar código de emparejamiento`)
+    console.log(`   GET  /health  - Health check`)
+    console.log(`   GET  /        - Información de la API\n`)
+})
+
+// ============ FIN SERVIDOR HTTP ============
 
 const RECONNECT_BASE_DELAY = config.connection?.reconnectBaseDelay || 3_000
 const RECONNECT_MAX_DELAY = config.connection?.reconnectMaxDelay || 120_000
@@ -43,7 +196,6 @@ const PROCESSED_MSG_TTL = 5 * 60_000
 const DELETED_MSG_TTL = 24 * 60 * 60_000
 const GROUP_CACHE_TTL = 10 * 60_000
 const GROUP_CACHE_CHECK = 2 * 60_000
-const HEALTH_CHECK_INTERVAL = config.connection?.healthCheckInterval || 60_000
 
 const processedMessages = new Set()
 const deletedMessages = new Map()
@@ -58,10 +210,9 @@ let reconnectTimer = null
 let isShuttingDown = false
 let lastActivity = Date.now()
 let connectionStartTime = null
+let codeGenerated = false
 
 const silentLogger = pino({ level: 'silent' })
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-const question = (txt) => new Promise(res => rl.question(txt, res))
 
 const groupCache = new NodeCache({
     stdTTL: GROUP_CACHE_TTL / 1000,
@@ -102,7 +253,9 @@ async function gracefulShutdown(signal) {
     }
     
     groupCache.close()
-    rl.close()
+    server.close(() => {
+        console.log('✅ Servidor HTTP cerrado')
+    })
     
     console.log('👋 Bot cerrado correctamente')
     setTimeout(() => process.exit(0), 1000)
@@ -214,10 +367,6 @@ async function connectSock() {
     }
     
     connectionStartTime = Date.now()
-    logger.connection('connecting', {
-        intento: reconnectAttempts,
-        timestamp: new Date().toISOString()
-    })
     
     if (sock) {
         try { sock.ev.removeAllListeners() } catch {}
@@ -238,21 +387,12 @@ async function connectSock() {
         const { version, isLatest } = await fetchLatestBaileysVersion()
         
         logger.info('📦 Versión de Baileys', { version, esUltima: isLatest })
-        keepAlive = new KeepAlive(sock, {
-            pingInterval: config.connection?.pingInterval || 15000,
-            presenceInterval: config.connection?.presenceInterval || 45000,
-            healthCheckInterval: config.connection?.healthCheckInterval || 60000,
-            ramLimit: config.ram_limit || 1024,
-            reconnectBaseDelay: RECONNECT_BASE_DELAY,
-            reconnectMaxDelay: RECONNECT_MAX_DELAY,
-            maxReconnectAttempts: MAX_RECONNECT_ATTEMPTS
-        })
         
         sock = makeWASocket({
             version,
             logger: silentLogger,
             printQRInTerminal: false,
-            browser: ['Mac OS', 'chrome', '121.0.6167.159'],
+            browser: ['StarlightBot', 'Chrome', '121.0.6167.159'],
             auth: {
                 creds: state.creds,
                 keys: makeCacheableSignalKeyStore(state.keys, silentLogger)
@@ -263,9 +403,9 @@ async function connectSock() {
             msgRetryCounterCache,
             generateHighQualityLinkPreview: true,
             getMessage: async () => null,
-            connectTimeoutMs: 120000,
-            defaultQueryTimeoutMs: 60000,
-            keepAliveIntervalMs: 25000,
+            connectTimeoutMs: 60000,
+            defaultQueryTimeoutMs: 30000,
+            keepAliveIntervalMs: 30000,
             retryRequestDelayMs: 1000,
             maxMsgRetryCount: 5,
             fireInitQueries: true,
@@ -273,7 +413,18 @@ async function connectSock() {
             markOnlineOnConnect: true,
             shouldSyncHistoryMessage: () => false,
             shouldIgnoreJid: (jid) => isJidBroadcast(jid),
-            maxRetries: 10,
+            maxRetries: 5,
+            patchMessageBeforeSending: (msg) => msg
+        })
+        
+        keepAlive = new KeepAlive(sock, {
+            pingInterval: config.connection?.pingInterval || 15000,
+            presenceInterval: config.connection?.presenceInterval || 45000,
+            healthCheckInterval: config.connection?.healthCheckInterval || 60000,
+            ramLimit: config.ram_limit || 1024,
+            reconnectBaseDelay: RECONNECT_BASE_DELAY,
+            reconnectMaxDelay: RECONNECT_MAX_DELAY,
+            maxReconnectAttempts: MAX_RECONNECT_ATTEMPTS
         })
         
         const light = bailMessage(sock)
@@ -333,43 +484,57 @@ async function connectSock() {
                 logger.error('Error guardando credenciales', e)
             }
         })
-        /*if (!sock.authState.creds.registered) {
-            console.log('\n🔐 Bot no registrado - Generando código de emparejamiento...\n')
+        
+        // ============ GENERAR CÓDIGO DE PAREAMIENTO ============
+        if (!sock.authState.creds.registered && !codeGenerated) {
+            codeGenerated = true
             
-            const raw = (await question('🚩 Ingresa tu número (ej: 51910*****): ')) || config.numbot
-            const number = raw.replace(/[^0-9]/g, '')
+            console.log('\n' + '='.repeat(50))
+            console.log('🔐 BOT NO REGISTRADO - MODO PAREAMIENTO')
+            console.log('='.repeat(50))
+            
+            // Usar número de config o el que viene por defecto
+            const defaultNumber = config.numbot || "51920700424"
+            const cleanNumber = defaultNumber.toString().replace(/[^0-9]/g, '')
+            
+            console.log(`📱 Número configurado: ${cleanNumber}`)
+            console.log(`🌐 También puedes usar POST /pair con {"number":"tu_numero"}\n`)
             
             if (typeof sock.requestPairingCode === 'function') {
-                const raw_code = await sock.requestPairingCode(number, 'STARTEAM')
-                const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
-                
-                logger.info('🔑 Código de emparejamiento generado', {
-                    numero: number.replace(/(\d{3})(\d{4})(\d+)/, '$1****$3')
-                })
-                
-                console.log('🚩 Código de emparejamiento:', code)
-                console.log('\n📱 Abre WhatsApp > Dispositivos vinculados > Vincular dispositivo')
-                console.log('✍️  Ingresa el código mostrado arriba\n')
+                try {
+                    // Esperar un poco para que la conexión se estabilice
+                    await new Promise(resolve => setTimeout(resolve, 2000))
+                    
+                    const raw_code = await sock.requestPairingCode(cleanNumber, 'STARTEAM')
+                    const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
+                    
+                    logger.info('🔑 Código de emparejamiento generado', {
+                        numero: cleanNumber.replace(/(\d{3})(\d{4})(\d+)/, '$1****$3')
+                    })
+                    
+                    console.log('\n' + '🚨'.repeat(15))
+                    console.log(`🚩 CÓDIGO DE PAREAMIENTO: ${code}`)
+                    console.log('🚨'.repeat(15))
+                    console.log('\n📱 INSTRUCCIONES:')
+                    console.log('1. Abre WhatsApp en tu teléfono')
+                    console.log('2. Ve a Ajustes/Configuración')
+                    console.log('3. Dispositivos vinculados')
+                    console.log('4. Toca "Vincular dispositivo"')
+                    console.log(`5. Ingresa el código: ${code}`)
+                    console.log('\n⏰ El código expira en 2 minutos\n')
+                    
+                } catch (error) {
+                    console.error('❌ Error generando código:', error.message)
+                    logger.error('Error generando código de pareamiento', error)
+                }
+            } else {
+                console.error('❌ requestPairingCode no está disponible en esta versión de Baileys')
             }
-        }*/
-        if (!sock.authState.creds.registered) {
-    console.log('\n🔐 Bot no registrado - Generando código de emparejamiento...\n')
-    
-    const number = '51920700424'  // Número fijo
-    
-    if (typeof sock.requestPairingCode === 'function') {
-        const raw_code = await sock.requestPairingCode(number, 'STARTEAM')
-        const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
-        
-        logger.info('🔑 Código de emparejamiento generado', {
-            numero: number.replace(/(\d{3})(\d{4})(\d+)/, '$1****$3')
-        })
-        
-        console.log('🚩 Código de emparejamiento:', code)
-        console.log('\n📱 Abre WhatsApp > Dispositivos vinculados > Vincular dispositivo')
-        console.log('✍️  Ingresa el código mostrado arriba\n')
-    }
-}
+        } else if (sock.authState.creds.registered) {
+            console.log('\n✅ BOT YA ESTÁ REGISTRADO')
+            console.log(`📱 Conectado como: ${sock.user?.jid?.split('@')[0] || 'Desconocido'}\n`)
+        }
+        // ============ FIN GENERACIÓN ============
         
         sock.ev.on('messages.upsert', async ({ messages, type }) => {
             if (type !== 'notify') return
@@ -377,11 +542,6 @@ async function connectSock() {
             const processStart = Date.now()
             lastActivity = Date.now()
             if (keepAlive) keepAlive.updateActivity(lastActivity)
-            
-            logger.info('📨 Mensajes recibidos', {
-                cantidad: messages.length,
-                tipo: type
-            })
             
             for (const msg of messages) {
                 if (msg.key.remoteJid?.endsWith('@g.us')) {
@@ -431,8 +591,7 @@ async function connectSock() {
             }
             
             if (connection === 'connecting') {
-                logger.connection('connecting')
-                console.log('🚩 Conectando...')
+                console.log('🔄 Conectando con WhatsApp...')
                 return
             }
             
@@ -442,16 +601,15 @@ async function connectSock() {
                 clearTimeout(reconnectTimer)
                 lastActivity = Date.now()
                 
-                logger.connection('open', {
+                logger.info('✅ Conexión establecida', {
                     jid: sock.user?.jid,
                     tiempoConexion: `${Date.now() - connectionStartTime}ms`
                 })
                 
-                console.log(`\n✅ ${config.name_bot} conectado correctamente`)
+                console.log(`\n✅ ${config.name_bot || 'Starlight'} conectado correctamente`)
                 console.log(`📱 Número: ${sock.user?.jid?.split('@')[0]}`)
-                console.log(`⏰ Tiempo de conexión: ${Date.now() - connectionStartTime}ms\n`)
+                console.log(`⏰ Tiempo: ${Date.now() - connectionStartTime}ms\n`)
                 
-                // Iniciar KeepAlive
                 await keepAlive.start()
                 
                 try {
@@ -478,7 +636,7 @@ async function connectSock() {
                 const reason = DisconnectReason
                 const errorMsg = lastDisconnect?.error?.message || 'Desconocido'
                 
-                logger.connection('close', {
+                logger.info('🔌 Conexión cerrada', {
                     statusCode,
                     error: errorMsg
                 })
@@ -487,7 +645,7 @@ async function connectSock() {
                 
                 if (keepAlive) {
                     keepAlive.state.isConnected = false
-                    keepAlive.monitor.incrementReconnects()
+                    if (keepAlive.monitor) keepAlive.monitor.incrementReconnects()
                 }
                 
                 const permanentCodes = new Set([
@@ -497,7 +655,7 @@ async function connectSock() {
                 ])
                 
                 if (permanentCodes.has(statusCode)) {
-                    logger.error('⛔ Desconexión permanente', null, { statusCode })
+                    logger.error('⛔ Desconexión permanente', { statusCode })
                     console.log(`\n⛔ Desconexión permanente (código ${statusCode})`)
                     console.log('💡 Solución: Borra la carpeta "./session" y reinicia el bot\n')
                     isShuttingDown = true
@@ -510,8 +668,6 @@ async function connectSock() {
                     
                     if (reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
                         reconnectAttempts++
-                    } else {
-                        logger.warn(`⚠️ Más de ${MAX_RECONNECT_ATTEMPTS} intentos de reconexión`)
                     }
                     
                     console.log(`🔄 Reconectando en ${(delay / 1000).toFixed(1)}s (intento ${reconnectAttempts})…\n`)
@@ -578,10 +734,13 @@ setInterval(() => {
 }, MEMORY_CHECK_INTERVAL)
 
 async function start() {
-    console.log('\n🤖 Iniciando Starlight Bot...\n')
+    console.log('\n' + '='.repeat(50))
+    console.log('🤖 Iniciando Starlight Bot...')
+    console.log('='.repeat(50))
     console.log(`💻 Sistema: ${os.type()} ${os.release()}`)
     console.log(`🧠 Memoria: ${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)}GB`)
-    console.log(`🔧 Node.js: ${process.version}\n`)
+    console.log(`🔧 Node.js: ${process.version}`)
+    console.log(`🌐 Puerto API: ${PORT}\n`)
     
     logger.info('🚀 Bot iniciado', {
         sistema: os.type(),
