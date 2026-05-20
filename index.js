@@ -334,24 +334,6 @@ async function connectSock() {
             }
         })
         if (!sock.authState.creds.registered) {
-    console.log('\n🔐 Bot no registrado - Generando código de emparejamiento...\n')
-    
-    const number = '51920700424'  // Número fijo
-    
-    if (typeof sock.requestPairingCode === 'function') {
-        const raw_code = await sock.requestPairingCode(number, 'STARTEAM')
-        const code = raw_code?.match(/.{1,4}/g)?.join('-') || raw_code
-        
-        logger.info('🔑 Código de emparejamiento generado', {
-            numero: number.replace(/(\d{3})(\d{4})(\d+)/, '$1****$3')
-        })
-        
-        console.log('🚩 Código de emparejamiento:', code)
-        console.log('\n📱 Abre WhatsApp > Dispositivos vinculados > Vincular dispositivo')
-        console.log('✍️  Ingresa el código mostrado arriba\n')
-    }
-}
-       /* if (!sock.authState.creds.registered) {
             console.log('\n🔐 Bot no registrado - Generando código de emparejamiento...\n')
             
             const raw = (await question('🚩 Ingresa tu número (ej: 51910*****): ')) || config.numbot
@@ -369,7 +351,7 @@ async function connectSock() {
                 console.log('\n📱 Abre WhatsApp > Dispositivos vinculados > Vincular dispositivo')
                 console.log('✍️  Ingresa el código mostrado arriba\n')
             }
-        }*/
+        }
         
         sock.ev.on('messages.upsert', async ({ messages, type }) => {
             if (type !== 'notify') return
