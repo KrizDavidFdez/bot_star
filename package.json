@@ -4,7 +4,7 @@
   "description": "Don't forget the love I gave you",
   "main": "main.js",
   "scripts": {
-    "start": "node ."
+   "start": "node --expose-gc main.js"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "npm:baileys",
