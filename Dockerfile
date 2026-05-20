@@ -1,4 +1,5 @@
-FROM node:18-slim
+# Cambiar de node:18-slim a node:20-slim o node:22-slim
+FROM node:20-slim
 
 # Instalar ffmpeg y dependencias
 RUN apt-get update && \
