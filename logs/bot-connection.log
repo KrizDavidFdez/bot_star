@@ -1,0 +1,12 @@
+{"level":30,"time":"2026-05-15T13:56:01.640Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","state":"connecting","icon":"🔗","intento":0,"timestamp":"2026-05-15T13:56:01.640Z"}
+
+{"level":30,"time":"2026-05-15T13:56:01.753Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","state":"connecting","icon":"🔗","timestamp":"2026-05-15T13:56:01.753Z"}
+
+{"level":30,"time":"2026-05-15T13:56:02.856Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","state":"open","icon":"✅","tiempoConexion":"1216ms","timestamp":"2026-05-15T13:56:02.856Z"}
+
+{"level":30,"time":"2026-05-15T15:07:25.129Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","state":"connecting","icon":"🔗","intento":0,"timestamp":"2026-05-15T15:07:25.129Z"}
+
+{"level":30,"time":"2026-05-15T15:07:25.256Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","state":"connecting","icon":"🔗","timestamp":"2026-05-15T15:07:25.256Z"}
+
+{"level":30,"time":"2026-05-15T15:07:26.385Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","state":"open","icon":"✅","tiempoConexion":"1256ms","timestamp":"2026-05-15T15:07:26.385Z"}
+

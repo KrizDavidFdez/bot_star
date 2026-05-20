@@ -1,0 +1,64 @@
+{
+  "users": {
+    "51910108980@s.whatsapp.net": {
+      "exp": 0,
+      "limit": 10,
+      "coins": 0,
+      "bank": 0,
+      "name": "",
+      "premium": false
+    },
+    "51920700424@s.whatsapp.net": {
+      "exp": 0,
+      "limit": 10,
+      "coins": 0,
+      "bank": 0,
+      "name": "",
+      "premium": false
+    },
+    "5218261275256@s.whatsapp.net": {
+      "exp": 0,
+      "limit": 10,
+      "coins": 0,
+      "bank": 0,
+      "name": "",
+      "premium": false
+    },
+    "50664312700@s.whatsapp.net": {
+      "exp": 0,
+      "limit": 10,
+      "coins": 0,
+      "bank": 0,
+      "name": "",
+      "premium": false
+    },
+    "5218321074388@s.whatsapp.net": {
+      "exp": 0,
+      "limit": 9,
+      "coins": 0,
+      "bank": 0,
+      "name": "",
+      "premium": false
+    },
+    "5218261000681@s.whatsapp.net": {
+      "exp": 0,
+      "limit": 10,
+      "coins": 0,
+      "bank": 0,
+      "name": "",
+      "premium": false
+    },
+    "120363406401780242@newsletter": {
+      "exp": 0,
+      "limit": 10,
+      "coins": 0,
+      "bank": 0,
+      "name": "",
+      "premium": false
+    }
+  },
+  "plugins": {},
+  "chats": {},
+  "game": {},
+  "settings": {}
+}

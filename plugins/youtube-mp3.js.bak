@@ -1,0 +1,75 @@
+/*const { ytdls } = require('../lib/ytdls')
+
+module.exports = {
+  command: ['yta', 'ytmp3'],
+  help: ['ytmp3'],
+  tags: ['downloader'],
+  limit: 1,
+  run: async (m, { light, text }) => {
+    if (!text) {
+      await light.type(m.from).text("🚩 Ingresa la *Url* de *YouTube*", m)
+      return false
+    }
+
+    await light.react(m, '🕛')
+    try {
+      const data = await ytdls(text, 'mp3')
+      await light.type(m.from).audio(
+        await light.type(m.from).fetchBuffer(data.dl_url),
+        {
+          title: data.title,
+          artist: data.author,
+          image: data.thumbnail,
+          quoted: m
+        }
+      )
+      await light.react(m, '✅')
+      return true 
+    } catch {
+      await light.react(m, '🍮')
+      return false
+    }
+  }
+}*/
+const axios = require('axios')
+
+async function ytdls(url) {
+  const { data } = await axios.get(`https://apis-starlights.vercel.app/api/youtubedl?url=${url}&format=mp3`)
+  return data.result
+}
+
+module.exports = {
+  command: ['yta', 'ytmp3'],
+  help: ['ytmp3'],
+  tags: ['downloader'],
+  limit: 1,
+
+  run: async (m, { light, text }) => {
+    if (!text) {
+      await light.type(m.from).text("🚩 Ingresa la *Url* de *YouTube*", m)
+      return false
+    }
+
+    await light.react(m, '🕛')
+
+    try {
+      const data = await ytdls(text)
+
+      await light.type(m.from).audio(
+        (await axios.get(data.dl_url, { responseType: 'arraybuffer' })).data,
+        {
+          title: data.title || '',
+          artist: data.creator || '',
+          quoted: m
+        }
+      )
+
+      await light.react(m, '✅')
+      return true
+    } catch (err) {
+      console.log(err)
+      await light.react(m, '🍮')
+      return false
+    }
+  }
+}

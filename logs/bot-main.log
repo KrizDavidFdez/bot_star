@@ -1,0 +1,516 @@
+{"level":"INFO","time":"2026-05-15T13:56:01.639Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🚀 Bot iniciado","sistema":"Linux","memoria":"62.29GB","node":"v25.9.0","timestamp":"2026-05-15T13:56:01.639Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:01.643Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📂 Estado de autenticación cargado","registrado":true,"timestamp":"2026-05-15T13:56:01.643Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:01.737Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📦 Versión de Baileys","version":[2,3000,1035194821],"esUltima":true,"timestamp":"2026-05-15T13:56:01.737Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:02.880Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🚀 KeepAlive Manager iniciado","config":{"pingInterval":15000,"presenceInterval":45000,"healthCheckInterval":60000,"memoryCheckInterval":15000,"ramLimit":1024,"maxInactiveTime":300000,"reconnectBaseDelay":3000,"reconnectMaxDelay":120000,"reconnectMultiplier":1.8,"maxReconnectAttempts":50},"system":{"platform":"linux","cpus":8,"memory":"62.29GB"},"timestamp":"2026-05-15T13:56:02.880Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:03.065Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363426085598386@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T13:56:03.065Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:03.066Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363424761756891@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T13:56:03.066Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:03.066Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363408058075104@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T13:56:03.066Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:03.066Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363365459921635@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T13:56:03.066Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:03.066Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"👥 Grupos precargados","cantidad":4,"timestamp":"2026-05-15T13:56:03.066Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:11.981Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T13:56:11.981Z"}
+
+{"level":"WARN","time":"2026-05-15T13:56:30.754Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18555MB","total":"63784MB","timestamp":"2026-05-15T13:56:30.754Z"}
+
+{"level":"INFO","time":"2026-05-15T13:56:30.768Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T13:56:30.768Z"}
+
+{"level":"WARN","time":"2026-05-15T13:57:00.769Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18583MB","total":"63784MB","timestamp":"2026-05-15T13:57:00.769Z"}
+
+{"level":"INFO","time":"2026-05-15T13:57:00.779Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T13:57:00.779Z"}
+
+{"level":"WARN","time":"2026-05-15T13:57:02.881Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T13:57:02.881Z"}
+
+{"level":"WARN","time":"2026-05-15T13:57:30.782Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18568MB","total":"63784MB","timestamp":"2026-05-15T13:57:30.782Z"}
+
+{"level":"INFO","time":"2026-05-15T13:57:30.791Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T13:57:30.791Z"}
+
+{"level":"WARN","time":"2026-05-15T13:58:00.796Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18556MB","total":"63784MB","timestamp":"2026-05-15T13:58:00.796Z"}
+
+{"level":"INFO","time":"2026-05-15T13:58:00.806Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T13:58:00.806Z"}
+
+{"level":"WARN","time":"2026-05-15T13:58:02.881Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T13:58:02.881Z"}
+
+{"level":"WARN","time":"2026-05-15T13:58:30.812Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18539MB","total":"63784MB","timestamp":"2026-05-15T13:58:30.812Z"}
+
+{"level":"INFO","time":"2026-05-15T13:58:30.822Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T13:58:30.822Z"}
+
+{"level":"WARN","time":"2026-05-15T13:59:00.839Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18561MB","total":"63784MB","timestamp":"2026-05-15T13:59:00.839Z"}
+
+{"level":"INFO","time":"2026-05-15T13:59:00.850Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T13:59:00.850Z"}
+
+{"level":"WARN","time":"2026-05-15T13:59:02.881Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T13:59:02.881Z"}
+
+{"level":"WARN","time":"2026-05-15T13:59:30.877Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18572MB","total":"63784MB","timestamp":"2026-05-15T13:59:30.877Z"}
+
+{"level":"INFO","time":"2026-05-15T13:59:30.894Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T13:59:30.894Z"}
+
+{"level":"WARN","time":"2026-05-15T14:00:00.915Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18504MB","total":"63784MB","timestamp":"2026-05-15T14:00:00.915Z"}
+
+{"level":"INFO","time":"2026-05-15T14:00:00.924Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:00:00.924Z"}
+
+{"level":"WARN","time":"2026-05-15T14:00:02.882Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:00:02.882Z"}
+
+{"level":"WARN","time":"2026-05-15T14:00:30.943Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18512MB","total":"63784MB","timestamp":"2026-05-15T14:00:30.943Z"}
+
+{"level":"INFO","time":"2026-05-15T14:00:30.955Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:00:30.955Z"}
+
+{"level":"WARN","time":"2026-05-15T14:01:00.980Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18520MB","total":"63784MB","timestamp":"2026-05-15T14:01:00.980Z"}
+
+{"level":"INFO","time":"2026-05-15T14:01:00.998Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:01:00.998Z"}
+
+{"level":"WARN","time":"2026-05-15T14:01:02.882Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:01:02.882Z"}
+
+{"level":"WARN","time":"2026-05-15T14:01:30.003Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18567MB","total":"63784MB","timestamp":"2026-05-15T14:01:30.003Z"}
+
+{"level":"INFO","time":"2026-05-15T14:01:30.013Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:01:30.013Z"}
+
+{"level":"WARN","time":"2026-05-15T14:01:32.884Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"320s","timestamp":"2026-05-15T14:01:32.884Z"}
+
+{"level":"WARN","time":"2026-05-15T14:02:00.040Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18520MB","total":"63784MB","timestamp":"2026-05-15T14:02:00.040Z"}
+
+{"level":"INFO","time":"2026-05-15T14:02:00.052Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:02:00.052Z"}
+
+{"level":"WARN","time":"2026-05-15T14:02:02.882Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 350s"],"timestamp":"2026-05-15T14:02:02.882Z"}
+
+{"level":"WARN","time":"2026-05-15T14:02:02.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"350s","timestamp":"2026-05-15T14:02:02.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:02:30.072Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18568MB","total":"63784MB","timestamp":"2026-05-15T14:02:30.072Z"}
+
+{"level":"INFO","time":"2026-05-15T14:02:30.086Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:02:30.086Z"}
+
+{"level":"WARN","time":"2026-05-15T14:02:32.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"380s","timestamp":"2026-05-15T14:02:32.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:03:00.100Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18661MB","total":"63784MB","timestamp":"2026-05-15T14:03:00.100Z"}
+
+{"level":"INFO","time":"2026-05-15T14:03:00.111Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:03:00.111Z"}
+
+{"level":"WARN","time":"2026-05-15T14:03:02.883Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 410s"],"timestamp":"2026-05-15T14:03:02.883Z"}
+
+{"level":"WARN","time":"2026-05-15T14:03:02.884Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"410s","timestamp":"2026-05-15T14:03:02.884Z"}
+
+{"level":"WARN","time":"2026-05-15T14:03:30.138Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18603MB","total":"63784MB","timestamp":"2026-05-15T14:03:30.138Z"}
+
+{"level":"INFO","time":"2026-05-15T14:03:30.156Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:03:30.156Z"}
+
+{"level":"WARN","time":"2026-05-15T14:03:32.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"440s","timestamp":"2026-05-15T14:03:32.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:04:00.170Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18551MB","total":"63784MB","timestamp":"2026-05-15T14:04:00.170Z"}
+
+{"level":"INFO","time":"2026-05-15T14:04:00.182Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:04:00.182Z"}
+
+{"level":"WARN","time":"2026-05-15T14:04:02.883Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 470s"],"timestamp":"2026-05-15T14:04:02.883Z"}
+
+{"level":"WARN","time":"2026-05-15T14:04:02.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"470s","timestamp":"2026-05-15T14:04:02.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:04:30.204Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18564MB","total":"63784MB","timestamp":"2026-05-15T14:04:30.204Z"}
+
+{"level":"INFO","time":"2026-05-15T14:04:30.214Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:04:30.214Z"}
+
+{"level":"WARN","time":"2026-05-15T14:04:32.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"500s","timestamp":"2026-05-15T14:04:32.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:05:00.239Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18573MB","total":"63784MB","timestamp":"2026-05-15T14:05:00.239Z"}
+
+{"level":"INFO","time":"2026-05-15T14:05:00.249Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:05:00.249Z"}
+
+{"level":"WARN","time":"2026-05-15T14:05:02.884Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 530s"],"timestamp":"2026-05-15T14:05:02.884Z"}
+
+{"level":"WARN","time":"2026-05-15T14:05:02.886Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"530s","timestamp":"2026-05-15T14:05:02.886Z"}
+
+{"level":"WARN","time":"2026-05-15T14:05:30.267Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18598MB","total":"63784MB","timestamp":"2026-05-15T14:05:30.267Z"}
+
+{"level":"INFO","time":"2026-05-15T14:05:30.277Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:05:30.277Z"}
+
+{"level":"WARN","time":"2026-05-15T14:05:32.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"560s","timestamp":"2026-05-15T14:05:32.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:06:00.300Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18569MB","total":"63784MB","timestamp":"2026-05-15T14:06:00.300Z"}
+
+{"level":"INFO","time":"2026-05-15T14:06:00.310Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.4MB","timestamp":"2026-05-15T14:06:00.310Z"}
+
+{"level":"WARN","time":"2026-05-15T14:06:02.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:06:02.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:06:30.332Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18556MB","total":"63784MB","timestamp":"2026-05-15T14:06:30.332Z"}
+
+{"level":"INFO","time":"2026-05-15T14:06:30.345Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.7MB","timestamp":"2026-05-15T14:06:30.345Z"}
+
+{"level":"WARN","time":"2026-05-15T14:07:00.363Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18563MB","total":"63784MB","timestamp":"2026-05-15T14:07:00.363Z"}
+
+{"level":"INFO","time":"2026-05-15T14:07:00.377Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.7MB","timestamp":"2026-05-15T14:07:00.377Z"}
+
+{"level":"WARN","time":"2026-05-15T14:07:02.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:07:02.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:07:30.395Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18577MB","total":"63784MB","timestamp":"2026-05-15T14:07:30.395Z"}
+
+{"level":"INFO","time":"2026-05-15T14:07:30.407Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.7MB","timestamp":"2026-05-15T14:07:30.407Z"}
+
+{"level":"WARN","time":"2026-05-15T14:08:00.424Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18648MB","total":"63784MB","timestamp":"2026-05-15T14:08:00.424Z"}
+
+{"level":"INFO","time":"2026-05-15T14:08:00.436Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"166.7MB","timestamp":"2026-05-15T14:08:00.436Z"}
+
+{"level":"WARN","time":"2026-05-15T14:08:02.884Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:08:02.884Z"}
+
+{"level":"INFO","time":"2026-05-15T14:08:15.523Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T14:08:15.523Z"}
+
+{"level":"INFO","time":"2026-05-15T14:08:15.656Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"💾 Metadata de grupo cacheada","jid":"120363426085598386@g.us","subject":"darle","participantes":2,"timestamp":"2026-05-15T14:08:15.656Z"}
+
+{"level":"WARN","time":"2026-05-15T14:08:30.457Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18545MB","total":"63784MB","timestamp":"2026-05-15T14:08:30.457Z"}
+
+{"level":"INFO","time":"2026-05-15T14:08:30.474Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"167.3MB","timestamp":"2026-05-15T14:08:30.474Z"}
+
+{"level":"WARN","time":"2026-05-15T14:09:00.486Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18497MB","total":"63784MB","timestamp":"2026-05-15T14:09:00.486Z"}
+
+{"level":"INFO","time":"2026-05-15T14:09:00.495Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:09:00.495Z"}
+
+{"level":"WARN","time":"2026-05-15T14:09:02.884Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:09:02.884Z"}
+
+{"level":"WARN","time":"2026-05-15T14:09:30.516Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18552MB","total":"63784MB","timestamp":"2026-05-15T14:09:30.516Z"}
+
+{"level":"INFO","time":"2026-05-15T14:09:30.527Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:09:30.527Z"}
+
+{"level":"WARN","time":"2026-05-15T14:10:00.549Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18517MB","total":"63784MB","timestamp":"2026-05-15T14:10:00.549Z"}
+
+{"level":"INFO","time":"2026-05-15T14:10:00.561Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:10:00.561Z"}
+
+{"level":"WARN","time":"2026-05-15T14:10:02.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:10:02.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:10:30.586Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18544MB","total":"63784MB","timestamp":"2026-05-15T14:10:30.586Z"}
+
+{"level":"INFO","time":"2026-05-15T14:10:30.598Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:10:30.598Z"}
+
+{"level":"WARN","time":"2026-05-15T14:11:00.616Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18545MB","total":"63784MB","timestamp":"2026-05-15T14:11:00.616Z"}
+
+{"level":"INFO","time":"2026-05-15T14:11:00.627Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:11:00.627Z"}
+
+{"level":"WARN","time":"2026-05-15T14:11:02.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:11:02.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:11:30.644Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18646MB","total":"63784MB","timestamp":"2026-05-15T14:11:30.644Z"}
+
+{"level":"INFO","time":"2026-05-15T14:11:30.654Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:11:30.654Z"}
+
+{"level":"WARN","time":"2026-05-15T14:12:00.679Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18602MB","total":"63784MB","timestamp":"2026-05-15T14:12:00.679Z"}
+
+{"level":"INFO","time":"2026-05-15T14:12:00.689Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:12:00.689Z"}
+
+{"level":"WARN","time":"2026-05-15T14:12:02.886Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:12:02.886Z"}
+
+{"level":"WARN","time":"2026-05-15T14:12:30.710Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18602MB","total":"63784MB","timestamp":"2026-05-15T14:12:30.710Z"}
+
+{"level":"INFO","time":"2026-05-15T14:12:30.721Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:12:30.721Z"}
+
+{"level":"WARN","time":"2026-05-15T14:13:00.747Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18587MB","total":"63784MB","timestamp":"2026-05-15T14:13:00.747Z"}
+
+{"level":"INFO","time":"2026-05-15T14:13:00.758Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:13:00.758Z"}
+
+{"level":"WARN","time":"2026-05-15T14:13:02.885Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:13:02.885Z"}
+
+{"level":"WARN","time":"2026-05-15T14:13:30.775Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18635MB","total":"63784MB","timestamp":"2026-05-15T14:13:30.775Z"}
+
+{"level":"INFO","time":"2026-05-15T14:13:30.790Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:13:30.790Z"}
+
+{"level":"WARN","time":"2026-05-15T14:13:32.888Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"317s","timestamp":"2026-05-15T14:13:32.888Z"}
+
+{"level":"WARN","time":"2026-05-15T14:14:00.817Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18701MB","total":"63784MB","timestamp":"2026-05-15T14:14:00.817Z"}
+
+{"level":"INFO","time":"2026-05-15T14:14:00.837Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:14:00.837Z"}
+
+{"level":"WARN","time":"2026-05-15T14:14:02.886Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 347s"],"timestamp":"2026-05-15T14:14:02.886Z"}
+
+{"level":"WARN","time":"2026-05-15T14:14:02.888Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"347s","timestamp":"2026-05-15T14:14:02.888Z"}
+
+{"level":"WARN","time":"2026-05-15T14:14:30.853Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18657MB","total":"63784MB","timestamp":"2026-05-15T14:14:30.853Z"}
+
+{"level":"INFO","time":"2026-05-15T14:14:30.863Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:14:30.863Z"}
+
+{"level":"WARN","time":"2026-05-15T14:14:32.889Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"377s","timestamp":"2026-05-15T14:14:32.889Z"}
+
+{"level":"WARN","time":"2026-05-15T14:15:00.883Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18668MB","total":"63784MB","timestamp":"2026-05-15T14:15:00.883Z"}
+
+{"level":"INFO","time":"2026-05-15T14:15:00.897Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:15:00.897Z"}
+
+{"level":"WARN","time":"2026-05-15T14:15:02.886Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 407s"],"timestamp":"2026-05-15T14:15:02.886Z"}
+
+{"level":"WARN","time":"2026-05-15T14:15:02.888Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"407s","timestamp":"2026-05-15T14:15:02.888Z"}
+
+{"level":"WARN","time":"2026-05-15T14:15:30.918Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18785MB","total":"63784MB","timestamp":"2026-05-15T14:15:30.918Z"}
+
+{"level":"INFO","time":"2026-05-15T14:15:30.930Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:15:30.930Z"}
+
+{"level":"WARN","time":"2026-05-15T14:15:32.888Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"437s","timestamp":"2026-05-15T14:15:32.888Z"}
+
+{"level":"WARN","time":"2026-05-15T14:16:00.954Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18619MB","total":"63784MB","timestamp":"2026-05-15T14:16:00.954Z"}
+
+{"level":"INFO","time":"2026-05-15T14:16:00.964Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:16:00.964Z"}
+
+{"level":"WARN","time":"2026-05-15T14:16:02.886Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:16:02.886Z"}
+
+{"level":"WARN","time":"2026-05-15T14:16:30.986Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18660MB","total":"63784MB","timestamp":"2026-05-15T14:16:30.986Z"}
+
+{"level":"INFO","time":"2026-05-15T14:16:30.996Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:16:30.996Z"}
+
+{"level":"WARN","time":"2026-05-15T14:17:00.021Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18679MB","total":"63784MB","timestamp":"2026-05-15T14:17:00.021Z"}
+
+{"level":"INFO","time":"2026-05-15T14:17:00.036Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:17:00.036Z"}
+
+{"level":"WARN","time":"2026-05-15T14:17:02.886Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:17:02.886Z"}
+
+{"level":"WARN","time":"2026-05-15T14:17:30.054Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18692MB","total":"63784MB","timestamp":"2026-05-15T14:17:30.054Z"}
+
+{"level":"INFO","time":"2026-05-15T14:17:30.067Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:17:30.067Z"}
+
+{"level":"WARN","time":"2026-05-15T14:18:00.087Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18605MB","total":"63784MB","timestamp":"2026-05-15T14:18:00.087Z"}
+
+{"level":"INFO","time":"2026-05-15T14:18:00.097Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:18:00.097Z"}
+
+{"level":"WARN","time":"2026-05-15T14:18:02.887Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:18:02.887Z"}
+
+{"level":"WARN","time":"2026-05-15T14:18:30.121Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18601MB","total":"63784MB","timestamp":"2026-05-15T14:18:30.120Z"}
+
+{"level":"INFO","time":"2026-05-15T14:18:30.133Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:18:30.133Z"}
+
+{"level":"WARN","time":"2026-05-15T14:19:00.154Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18631MB","total":"63784MB","timestamp":"2026-05-15T14:19:00.154Z"}
+
+{"level":"INFO","time":"2026-05-15T14:19:00.167Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:19:00.167Z"}
+
+{"level":"WARN","time":"2026-05-15T14:19:02.888Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:19:02.888Z"}
+
+{"level":"WARN","time":"2026-05-15T14:19:30.183Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18638MB","total":"63784MB","timestamp":"2026-05-15T14:19:30.183Z"}
+
+{"level":"INFO","time":"2026-05-15T14:19:30.194Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:19:30.194Z"}
+
+{"level":"WARN","time":"2026-05-15T14:20:00.220Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18674MB","total":"63784MB","timestamp":"2026-05-15T14:20:00.220Z"}
+
+{"level":"INFO","time":"2026-05-15T14:20:00.234Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:20:00.234Z"}
+
+{"level":"WARN","time":"2026-05-15T14:20:02.889Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T14:20:02.889Z"}
+
+{"level":"WARN","time":"2026-05-15T14:20:30.253Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18640MB","total":"63784MB","timestamp":"2026-05-15T14:20:30.253Z"}
+
+{"level":"INFO","time":"2026-05-15T14:20:30.263Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:20:30.263Z"}
+
+{"level":"WARN","time":"2026-05-15T14:21:00.282Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18655MB","total":"63784MB","timestamp":"2026-05-15T14:21:00.282Z"}
+
+{"level":"INFO","time":"2026-05-15T14:21:00.294Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:21:00.294Z"}
+
+{"level":"WARN","time":"2026-05-15T14:21:02.889Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"300s","timestamp":"2026-05-15T14:21:02.889Z"}
+
+{"level":"WARN","time":"2026-05-15T14:21:02.889Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 300s"],"timestamp":"2026-05-15T14:21:02.889Z"}
+
+{"level":"WARN","time":"2026-05-15T14:21:30.317Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18610MB","total":"63784MB","timestamp":"2026-05-15T14:21:30.317Z"}
+
+{"level":"INFO","time":"2026-05-15T14:21:30.327Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:21:30.327Z"}
+
+{"level":"WARN","time":"2026-05-15T14:21:32.890Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"330s","timestamp":"2026-05-15T14:21:32.890Z"}
+
+{"level":"WARN","time":"2026-05-15T14:22:00.348Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18628MB","total":"63784MB","timestamp":"2026-05-15T14:22:00.348Z"}
+
+{"level":"INFO","time":"2026-05-15T14:22:00.360Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:22:00.360Z"}
+
+{"level":"WARN","time":"2026-05-15T14:22:02.889Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 360s"],"timestamp":"2026-05-15T14:22:02.889Z"}
+
+{"level":"WARN","time":"2026-05-15T14:22:02.891Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"360s","timestamp":"2026-05-15T14:22:02.891Z"}
+
+{"level":"WARN","time":"2026-05-15T14:22:30.379Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18649MB","total":"63784MB","timestamp":"2026-05-15T14:22:30.379Z"}
+
+{"level":"INFO","time":"2026-05-15T14:22:30.389Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:22:30.389Z"}
+
+{"level":"WARN","time":"2026-05-15T14:22:32.891Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"390s","timestamp":"2026-05-15T14:22:32.891Z"}
+
+{"level":"WARN","time":"2026-05-15T14:23:00.411Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18690MB","total":"63784MB","timestamp":"2026-05-15T14:23:00.411Z"}
+
+{"level":"INFO","time":"2026-05-15T14:23:00.421Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:23:00.421Z"}
+
+{"level":"WARN","time":"2026-05-15T14:23:02.890Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 420s"],"timestamp":"2026-05-15T14:23:02.890Z"}
+
+{"level":"WARN","time":"2026-05-15T14:23:02.891Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"420s","timestamp":"2026-05-15T14:23:02.891Z"}
+
+{"level":"WARN","time":"2026-05-15T14:23:30.447Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18682MB","total":"63784MB","timestamp":"2026-05-15T14:23:30.447Z"}
+
+{"level":"INFO","time":"2026-05-15T14:23:30.457Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:23:30.457Z"}
+
+{"level":"WARN","time":"2026-05-15T14:23:32.892Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"450s","timestamp":"2026-05-15T14:23:32.892Z"}
+
+{"level":"WARN","time":"2026-05-15T14:24:00.475Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18663MB","total":"63784MB","timestamp":"2026-05-15T14:24:00.475Z"}
+
+{"level":"INFO","time":"2026-05-15T14:24:00.488Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:24:00.487Z"}
+
+{"level":"WARN","time":"2026-05-15T14:24:02.890Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 480s"],"timestamp":"2026-05-15T14:24:02.890Z"}
+
+{"level":"WARN","time":"2026-05-15T14:24:02.892Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"480s","timestamp":"2026-05-15T14:24:02.892Z"}
+
+{"level":"WARN","time":"2026-05-15T14:24:30.507Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18677MB","total":"63784MB","timestamp":"2026-05-15T14:24:30.507Z"}
+
+{"level":"INFO","time":"2026-05-15T14:24:30.518Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:24:30.518Z"}
+
+{"level":"WARN","time":"2026-05-15T14:24:32.893Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"510s","timestamp":"2026-05-15T14:24:32.893Z"}
+
+{"level":"WARN","time":"2026-05-15T14:25:00.540Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18335MB","total":"63784MB","timestamp":"2026-05-15T14:25:00.540Z"}
+
+{"level":"INFO","time":"2026-05-15T14:25:00.551Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:25:00.551Z"}
+
+{"level":"WARN","time":"2026-05-15T14:25:02.889Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 540s"],"timestamp":"2026-05-15T14:25:02.889Z"}
+
+{"level":"WARN","time":"2026-05-15T14:25:02.893Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"540s","timestamp":"2026-05-15T14:25:02.893Z"}
+
+{"level":"WARN","time":"2026-05-15T14:25:30.571Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18482MB","total":"63784MB","timestamp":"2026-05-15T14:25:30.571Z"}
+
+{"level":"INFO","time":"2026-05-15T14:25:30.581Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🗑️ Garbage collection ejecutada","forzada":true,"memoriaAntes":"168.7MB","timestamp":"2026-05-15T14:25:30.581Z"}
+
+{"level":"WARN","time":"2026-05-15T14:25:32.893Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"570s","timestamp":"2026-05-15T14:25:32.893Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:25.128Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🚀 Bot iniciado","sistema":"Linux","memoria":"62.29GB","node":"v25.9.0","timestamp":"2026-05-15T15:07:25.128Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:25.134Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📂 Estado de autenticación cargado","registrado":true,"timestamp":"2026-05-15T15:07:25.134Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:25.241Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📦 Versión de Baileys","version":[2,3000,1035194821],"esUltima":true,"timestamp":"2026-05-15T15:07:25.241Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:26.408Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🚀 KeepAlive Manager iniciado","config":{"pingInterval":15000,"presenceInterval":45000,"healthCheckInterval":60000,"memoryCheckInterval":15000,"ramLimit":1024,"maxInactiveTime":300000,"reconnectBaseDelay":3000,"reconnectMaxDelay":120000,"reconnectMultiplier":1.8,"maxReconnectAttempts":50},"system":{"platform":"linux","cpus":8,"memory":"62.29GB"},"timestamp":"2026-05-15T15:07:26.408Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:26.597Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363426085598386@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T15:07:26.597Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:26.597Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363424761756891@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T15:07:26.597Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:26.598Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363408058075104@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T15:07:26.598Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:26.598Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"🔄 Grupo actualizado","jid":"120363365459921635@g.us","cambios":"id, notify, addressingMode, subject, subjectOwner, subjectOwnerPn, subjectOwnerUsername, subjectTime, size, creation, owner, ownerPn, ownerUsername, owner_country_code, desc, descId, descOwner, descOwnerPn, descOwnerUsername, descTime, linkedParent, restrict, announce, isCommunity, isCommunityAnnounce, joinApprovalMode, memberAddMode, participants, ephemeralDuration","timestamp":"2026-05-15T15:07:26.598Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:26.598Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"👥 Grupos precargados","cantidad":4,"timestamp":"2026-05-15T15:07:26.598Z"}
+
+{"level":"WARN","time":"2026-05-15T15:07:30.256Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19001MB","total":"63784MB","timestamp":"2026-05-15T15:07:30.256Z"}
+
+{"level":"INFO","time":"2026-05-15T15:07:41.532Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T15:07:41.532Z"}
+
+{"level":"WARN","time":"2026-05-15T15:08:00.265Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19187MB","total":"63784MB","timestamp":"2026-05-15T15:08:00.265Z"}
+
+{"level":"WARN","time":"2026-05-15T15:08:26.410Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:08:26.410Z"}
+
+{"level":"WARN","time":"2026-05-15T15:08:30.271Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18872MB","total":"63784MB","timestamp":"2026-05-15T15:08:30.271Z"}
+
+{"level":"WARN","time":"2026-05-15T15:09:00.276Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19099MB","total":"63784MB","timestamp":"2026-05-15T15:09:00.276Z"}
+
+{"level":"WARN","time":"2026-05-15T15:09:26.409Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:09:26.409Z"}
+
+{"level":"WARN","time":"2026-05-15T15:09:30.282Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19122MB","total":"63784MB","timestamp":"2026-05-15T15:09:30.282Z"}
+
+{"level":"WARN","time":"2026-05-15T15:10:00.285Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18989MB","total":"63784MB","timestamp":"2026-05-15T15:10:00.285Z"}
+
+{"level":"WARN","time":"2026-05-15T15:10:26.410Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:10:26.410Z"}
+
+{"level":"WARN","time":"2026-05-15T15:10:30.302Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18959MB","total":"63784MB","timestamp":"2026-05-15T15:10:30.302Z"}
+
+{"level":"WARN","time":"2026-05-15T15:11:00.327Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18958MB","total":"63784MB","timestamp":"2026-05-15T15:11:00.327Z"}
+
+{"level":"WARN","time":"2026-05-15T15:11:26.410Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:11:26.409Z"}
+
+{"level":"WARN","time":"2026-05-15T15:11:30.349Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19009MB","total":"63784MB","timestamp":"2026-05-15T15:11:30.349Z"}
+
+{"level":"INFO","time":"2026-05-15T15:11:49.878Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T15:11:49.878Z"}
+
+{"level":"INFO","time":"2026-05-15T15:11:52.457Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T15:11:52.457Z"}
+
+{"level":"WARN","time":"2026-05-15T15:12:00.370Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19031MB","total":"63784MB","timestamp":"2026-05-15T15:12:00.370Z"}
+
+{"level":"WARN","time":"2026-05-15T15:12:26.409Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:12:26.409Z"}
+
+{"level":"WARN","time":"2026-05-15T15:12:30.395Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19018MB","total":"63784MB","timestamp":"2026-05-15T15:12:30.395Z"}
+
+{"level":"WARN","time":"2026-05-15T15:13:00.419Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19031MB","total":"63784MB","timestamp":"2026-05-15T15:13:00.419Z"}
+
+{"level":"WARN","time":"2026-05-15T15:13:26.410Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:13:26.410Z"}
+
+{"level":"WARN","time":"2026-05-15T15:13:30.438Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19073MB","total":"63784MB","timestamp":"2026-05-15T15:13:30.438Z"}
+
+{"level":"INFO","time":"2026-05-15T15:13:43.653Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T15:13:43.653Z"}
+
+{"level":"INFO","time":"2026-05-15T15:13:44.611Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T15:13:44.611Z"}
+
+{"level":"WARN","time":"2026-05-15T15:14:00.458Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19058MB","total":"63784MB","timestamp":"2026-05-15T15:14:00.458Z"}
+
+{"level":"WARN","time":"2026-05-15T15:14:26.411Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:14:26.411Z"}
+
+{"level":"WARN","time":"2026-05-15T15:14:30.479Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19088MB","total":"63784MB","timestamp":"2026-05-15T15:14:30.479Z"}
+
+{"level":"WARN","time":"2026-05-15T15:15:00.502Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19069MB","total":"63784MB","timestamp":"2026-05-15T15:15:00.502Z"}
+
+{"level":"WARN","time":"2026-05-15T15:15:26.411Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:15:26.411Z"}
+
+{"level":"WARN","time":"2026-05-15T15:15:30.525Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19012MB","total":"63784MB","timestamp":"2026-05-15T15:15:30.525Z"}
+
+{"level":"WARN","time":"2026-05-15T15:16:00.548Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18980MB","total":"63784MB","timestamp":"2026-05-15T15:16:00.548Z"}
+
+{"level":"WARN","time":"2026-05-15T15:16:26.411Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:16:26.411Z"}
+
+{"level":"WARN","time":"2026-05-15T15:16:30.568Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18990MB","total":"63784MB","timestamp":"2026-05-15T15:16:30.568Z"}
+
+{"level":"WARN","time":"2026-05-15T15:17:00.585Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19020MB","total":"63784MB","timestamp":"2026-05-15T15:17:00.585Z"}
+
+{"level":"WARN","time":"2026-05-15T15:17:26.411Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:17:26.411Z"}
+
+{"level":"WARN","time":"2026-05-15T15:17:30.608Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19017MB","total":"63784MB","timestamp":"2026-05-15T15:17:30.608Z"}
+
+{"level":"WARN","time":"2026-05-15T15:18:00.628Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18984MB","total":"63784MB","timestamp":"2026-05-15T15:18:00.628Z"}
+
+{"level":"WARN","time":"2026-05-15T15:18:26.411Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:18:26.411Z"}
+
+{"level":"WARN","time":"2026-05-15T15:18:30.649Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19075MB","total":"63784MB","timestamp":"2026-05-15T15:18:30.649Z"}
+
+{"level":"WARN","time":"2026-05-15T15:19:00.671Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18981MB","total":"63784MB","timestamp":"2026-05-15T15:19:00.671Z"}
+
+{"level":"WARN","time":"2026-05-15T15:19:26.412Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:19:26.412Z"}
+
+{"level":"WARN","time":"2026-05-15T15:19:30.693Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18983MB","total":"63784MB","timestamp":"2026-05-15T15:19:30.693Z"}
+
+{"level":"WARN","time":"2026-05-15T15:20:00.716Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19036MB","total":"63784MB","timestamp":"2026-05-15T15:20:00.716Z"}
+
+{"level":"INFO","time":"2026-05-15T15:20:08.259Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T15:20:08.259Z"}
+
+{"level":"INFO","time":"2026-05-15T15:20:08.426Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"💾 Metadata de grupo cacheada","jid":"120363426085598386@g.us","subject":"darle","participantes":2,"timestamp":"2026-05-15T15:20:08.426Z"}
+
+{"level":"INFO","time":"2026-05-15T15:20:08.602Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"💾 Metadata de grupo cacheada","jid":"120363426085598386@g.us","subject":"darle","participantes":2,"timestamp":"2026-05-15T15:20:08.602Z"}
+
+{"level":"INFO","time":"2026-05-15T15:20:10.574Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"📨 Mensajes recibidos","cantidad":1,"tipo":"notify","timestamp":"2026-05-15T15:20:10.574Z"}
+
+{"level":"WARN","time":"2026-05-15T15:20:26.413Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:20:26.413Z"}
+
+{"level":"WARN","time":"2026-05-15T15:20:30.802Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19133MB","total":"63784MB","timestamp":"2026-05-15T15:20:30.802Z"}
+
+{"level":"WARN","time":"2026-05-15T15:21:00.827Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19102MB","total":"63784MB","timestamp":"2026-05-15T15:21:00.827Z"}
+
+{"level":"WARN","time":"2026-05-15T15:21:26.413Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:21:26.413Z"}
+
+{"level":"WARN","time":"2026-05-15T15:21:30.849Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19152MB","total":"63784MB","timestamp":"2026-05-15T15:21:30.849Z"}
+
+{"level":"WARN","time":"2026-05-15T15:22:00.868Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19102MB","total":"63784MB","timestamp":"2026-05-15T15:22:00.868Z"}
+
+{"level":"WARN","time":"2026-05-15T15:22:26.413Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:22:26.413Z"}
+
+{"level":"WARN","time":"2026-05-15T15:22:30.891Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18994MB","total":"63784MB","timestamp":"2026-05-15T15:22:30.891Z"}
+
+{"level":"WARN","time":"2026-05-15T15:23:00.913Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19043MB","total":"63784MB","timestamp":"2026-05-15T15:23:00.913Z"}
+
+{"level":"WARN","time":"2026-05-15T15:23:26.412Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:23:26.412Z"}
+
+{"level":"WARN","time":"2026-05-15T15:23:30.937Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19049MB","total":"63784MB","timestamp":"2026-05-15T15:23:30.937Z"}
+
+{"level":"WARN","time":"2026-05-15T15:24:00.961Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19045MB","total":"63784MB","timestamp":"2026-05-15T15:24:00.961Z"}
+
+{"level":"WARN","time":"2026-05-15T15:24:26.413Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado"],"timestamp":"2026-05-15T15:24:26.413Z"}
+
+{"level":"WARN","time":"2026-05-15T15:24:30.988Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19061MB","total":"63784MB","timestamp":"2026-05-15T15:24:30.988Z"}
+
+{"level":"WARN","time":"2026-05-15T15:25:00.009Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"19005MB","total":"63784MB","timestamp":"2026-05-15T15:25:00.009Z"}
+
+{"level":"WARN","time":"2026-05-15T15:25:26.414Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Problemas de salud detectados","issues":["WebSocket no conectado","Inactivo por 315s"],"timestamp":"2026-05-15T15:25:26.414Z"}
+
+{"level":"WARN","time":"2026-05-15T15:25:26.416Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"315s","timestamp":"2026-05-15T15:25:26.416Z"}
+
+{"level":"WARN","time":"2026-05-15T15:25:30.031Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Memoria del sistema alta","usado":"18978MB","total":"63784MB","timestamp":"2026-05-15T15:25:30.031Z"}
+
+{"level":"WARN","time":"2026-05-15T15:25:56.417Z","pid":46,"hostname":"8ba01a0f-49f7-4371-b127-d1d081e56252","event":"⚠️ Inactividad prolongada detectada","tiempo":"345s","timestamp":"2026-05-15T15:25:56.417Z"}
+
